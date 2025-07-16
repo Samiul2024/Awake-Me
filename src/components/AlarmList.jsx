@@ -1,19 +1,21 @@
 import React from 'react';
 import AlarmItem from './AlarmItem';
 
-const AlarmList = ({ alarms, setAlarms }) => {
+const AlarmList = ({ alarms, setAlarms, setEditingAlarm }) => {
   return (
-    <div>
-      {alarms.length === 0 ? (
-        <p className="text-gray-500 text-center">No alarms set yet.</p>
-      ) : (
-        <ul className="space-y-2">
-          {alarms.map((alarm) => (
-            <AlarmItem key={alarm.id} alarm={alarm} alarms={alarms} setAlarms={setAlarms} />
-          ))}
-        </ul>
-      )}
-    </div>
+    <ul className="space-y-3">
+      {alarms
+        .filter((alarm) => alarm && typeof alarm === 'object') // ✅ Filter out null/undefined
+        .map((alarm) => (
+          <AlarmItem
+            key={alarm.id}
+            alarm={alarm}
+            alarms={alarms}
+            setAlarms={setAlarms}
+            setEditingAlarm={setEditingAlarm}
+          />
+        ))}
+    </ul>
   );
 };
 
