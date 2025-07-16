@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
 const DEFAULT_SOUNDS = [
-  { name: "Beep", file: "/alarm.mp3" },
-  { name: "Bell", file: "/bell.mp3" },
+  { name: "drilis obaya", file: "/public/alarm.mp3" },
+  { name: "Erturul Gazi", file: "/public/alarm2.mp3" },
 ];
 
 const SoundPicker = ({ selected, setSelected }) => {

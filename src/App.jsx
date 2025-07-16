@@ -79,11 +79,20 @@ const App = () => {
   };
 
   // Handle Silence Action
-  const handleSilent = () => {
-  stopAlarm(); // ✅ Stop the ringing sound
+const handleSilent = () => {
+  stopAlarm(); // stop sound
+
+  const today = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+
   const updated = alarms.map(a =>
-    a.id === activeAlarm.id ? { ...a, silent: true } : a
+    a.id === activeAlarm.id
+      ? {
+          ...a,
+          lastTriggered: today, // mark as triggered today
+        }
+      : a
   );
+
   setAlarms(updated);
   localStorage.setItem('alarms', JSON.stringify(updated));
   setActiveAlarm(null);
@@ -93,7 +102,7 @@ const App = () => {
   return (
     <div className="min-h-screen bg-gray-100 p-4">
       <div className="max-w-xl mx-auto bg-white shadow-lg rounded-xl p-6">
-        <h1 className="text-2xl font-bold text-center mb-4">🔔 Offline Alarm App</h1>
+        <h1 className="text-2xl font-bold text-center mb-4">🔔 Awake Me</h1>
         <AlarmForm
           alarms={alarms}
           setAlarms={setAlarms}
