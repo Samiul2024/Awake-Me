@@ -1,3 +1,5 @@
+import React from 'react';
+
 const AlarmItem = ({ alarm, alarms, setAlarms, setEditingAlarm }) => {
   const handleDelete = () => {
     const updated = alarms.filter((a) => a.id !== alarm.id);
@@ -25,11 +27,23 @@ const AlarmItem = ({ alarm, alarms, setAlarms, setEditingAlarm }) => {
     localStorage.setItem("alarms", JSON.stringify(updated));
   };
 
+  // 📛 Extract sound file name (if data URL, show "Custom Sound")
+  const getSoundLabel = () => {
+    if (!alarm.sound) return "Default";
+    if (alarm.sound.startsWith('data:')) {
+      const match = alarm.sound.match(/name=([^;]+)/);
+      return match ? decodeURIComponent(match[1]) : "Custom Sound";
+    }
+    const parts = alarm.sound.split('/');
+    return parts[parts.length - 1];
+  };
+
   return (
     <li className="flex justify-between items-center p-3 bg-gray-100 rounded">
       <div>
         <p className="font-semibold">{alarm.label} {alarm.silent ? "(Silent)" : ""}</p>
         <p className="text-sm">{alarm.time} | {alarm.repeat ? "Repeats" : "One-time"}</p>
+        <p className="text-xs text-gray-600">🔊 Sound: {getSoundLabel()}</p>
       </div>
       <div className="flex gap-2">
         <button onClick={() => setEditingAlarm(alarm)} className="text-blue-500">Edit</button>
