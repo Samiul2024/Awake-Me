@@ -4,7 +4,7 @@ import AlarmList from './components/AlarmList';
 // import ringAlarm from './utils/ringAlarm';
 import AlarmPopup from './components/AlarmPopup'; // You must create this component
 import ringAlarm, { stopAlarm } from './utils/ringAlarm';
-
+import logo from '../public/awake-me_logo.png'
 
 const App = () => {
   const [alarms, setAlarms] = useState([]);
@@ -102,7 +102,10 @@ const handleSilent = () => {
   return (
     <div className="min-h-screen bg-gray-100 p-4">
       <div className="max-w-xl mx-auto bg-white shadow-lg rounded-xl p-6">
-        <h1 className="text-2xl font-bold text-center mb-4">🔔 Awake Me</h1>
+        <div className="flex items-center justify-center gap-3 mb-4">
+  <img src={logo} alt="Alarm Logo" className="w-10 h-10 rounded-xs shadow" />
+  <h1 className="text-2xl font-bold">Awake Me</h1>
+</div>
         <AlarmForm
           alarms={alarms}
           setAlarms={setAlarms}

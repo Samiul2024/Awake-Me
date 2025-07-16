@@ -12,7 +12,7 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico'],
       manifest: {
-        name: 'Offline Alarm App',
+        name: 'AwakeMe',
         short_name: 'Alarm',
         start_url: '/',
         display: 'standalone',
